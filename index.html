@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arabian Talents Group | Manpower &amp; Staffing Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    :root{
+        --ink:#0d0f1c;
+        --navy:#141a30;
+        --navy-2:#1a2140;
+        --navy-3:#0f3460;
+        --gold:#c9a227;
+        --gold-2:#e8c158;
+        --sand:#faf7f0;
+        --sand-2:#f2ede0;
+        --text:#2b2b33;
+        --muted:#6b6f7a;
+        --line: rgba(201,162,39,0.25);
+        --shadow: 0 20px 60px rgba(13,15,28,0.12);
+        --ease: cubic-bezier(.16,.84,.44,1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--sand);overflow-x:hidden;}
+    h1,h2,h3,h4{font-family:'League Spartan',sans-serif;}
+    img{max-width:100%;display:block;}
+    a{-webkit-tap-highlight-color:transparent;}
+    ::selection{background:var(--gold);color:var(--ink);}
+
+    /* ===== PRELOADER ===== */
+    #preloader{position:fixed;inset:0;background:var(--ink);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px;transition:opacity .7s var(--ease), visibility .7s var(--ease);}
+    #preloader.done{opacity:0;visibility:hidden;pointer-events:none;}
+    .pre-lattice{width:74px;height:74px;position:relative;}
+    .pre-lattice svg{width:100%;height:100%;}
+    .pre-lattice path{stroke:var(--gold);stroke-width:1.4;fill:none;stroke-dasharray:340;stroke-dashoffset:340;animation:draw 1.6s var(--ease) forwards infinite alternate;}
+    @keyframes draw{to{stroke-dashoffset:0;}}
+    .pre-text{color:#d8d8e0;font-size:11px;letter-spacing:4px;text-transform:uppercase;font-weight:600;}
+    .pre-text span{color:var(--gold);}
+
+    /* ===== SCROLL PROGRESS ===== */
+    #scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2));width:0%;z-index:1200;transition:width .1s linear;}
+
+    /* ===== NAVBAR ===== */
+    nav{background:rgba(13,15,28,0.72);padding:16px 44px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:900;border-bottom:1px solid rgba(255,255,255,0.06);transition:padding .35s var(--ease), background .35s var(--ease);}
+    nav.scrolled{padding:10px 44px;background:rgba(13,15,28,0.92);box-shadow:0 10px 40px rgba(0,0,0,0.35);}
+    .logo{display:flex;align-items:center;gap:12px;}
+    .logo img{height:46px;transition:transform .4s var(--ease);}
+    .logo:hover img{transform:rotate(-6deg) scale(1.05);}
+    .logo-text{color:#fff;font-size:19px;font-weight:700;line-height:1.2;font-family:'League Spartan',sans-serif;letter-spacing:.2px;}
+    .logo-text span{color:var(--gold);display:block;font-size:10.5px;font-weight:500;letter-spacing:3px;font-family:'Inter',sans-serif;margin-top:2px;}
+    nav ul{list-style:none;display:flex;gap:8px;align-items:center;}
+    nav ul li a{color:#cfd0da;text-decoration:none;font-size:13.5px;font-weight:500;transition:color .3s;padding:8px 14px;position:relative;letter-spacing:.2px;}
+    nav ul li a:not(.nav-cta)::after{content:'';position:absolute;left:14px;right:14px;bottom:4px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease);}
+    nav ul li a:not(.nav-cta):hover::after{transform:scaleX(1);transform-origin:left;}
+    nav ul li a:hover{color:#fff;}
+    .nav-cta{background:var(--gold);color:var(--ink) !important;padding:10px 22px !important;border-radius:100px;font-weight:700 !important;transition:all .35s var(--ease);}
+    .nav-cta:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 10px 24px rgba(201,162,39,0.4);}
+    .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;z-index:920;}
+    .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:all .35s var(--ease);}
+    .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .burger.open span:nth-child(2){opacity:0;}
+    .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+    /* ===== HERO ===== */
+    .hero{position:relative;isolation:isolate;min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 40px 100px;overflow:hidden;background:linear-gradient(135deg,#0d0f1c 0%,#141a30 45%,#0f3460 100%);}
+    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.5;}
+    .hero-video-overlay{position:absolute;inset:0;z-index:-2;background-color: rgba(0, 0, 0, 0.2);}
+    .hero-glow{position:absolute;top:38%;left:50%;width:800px;height:800px;background:radial-gradient(circle,rgba(201,162,39,0.22) 0%,rgba(201,162,39,0) 70%);transform:translate(-50%,-50%);z-index:-1;animation:pulseGlow 7s ease-in-out infinite;}
+    @keyframes pulseGlow{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.18);}}
+    .hero-lattice{position:absolute;top:-60px;right:-60px;width:340px;height:340px;opacity:.14;z-index:-1;animation:spinSlow 90s linear infinite;}
+    .hero-lattice.left{top:auto;bottom:-90px;left:-90px;right:auto;opacity:.09;animation-direction:reverse;}
+    .particle{position:absolute;bottom:-10px;width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:.5;animation:floatUp linear infinite;z-index:-1;}
+    @keyframes floatUp{0%{transform:translateY(0) translateX(0);opacity:0;}10%{opacity:.6;}90%{opacity:.3;}100%{transform:translateY(-460px) translateX(24px);opacity:0;}}
+    .hero-skyline{position:absolute;left:0;right:0;bottom:0;height:110px;z-index:-1;opacity:.55;}
+    .hero-skyline path{fill:#0a0c16;}
+    .hero-content{position:relative;z-index:2;max-width:960px;margin:0 auto;}
+    .eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold-2);font-size:13px;font-weight:700;letter-spacing:5px;text-transform:uppercase;margin-bottom:28px;text-shadow:0 2px 12px rgba(0,0,0,.4);}
+    .eyebrow::before,.eyebrow::after{content:'';width:30px;height:1px;background:var(--gold-2);opacity:.75;}
+    .hero h1{font-size:clamp(42px,7.5vw,80px);font-weight:800;line-height:1.06;margin-bottom:28px;color:#fff;letter-spacing:-2px;text-shadow:0 4px 30px rgba(0,0,0,.55);}
+    .hero h1 .word{display:inline-block;opacity:0;transform:translateY(30px);animation:wordUp .8s var(--ease) forwards;}
+    @keyframes wordUp{to{opacity:1;transform:translateY(0);}}
+    .hero h1 span.accent{color:var(--gold-2);position:relative;font-weight:800;font-style:italic;}
+    .hero p.lead{font-size:20px;color:#eceef3;margin:0 auto 46px;line-height:1.75;max-width:660px;font-weight:500;letter-spacing:.1px;text-shadow:0 2px 16px rgba(0,0,0,.45);}
+    .hero-btns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+    .btn-primary,.btn-outline{position:relative;overflow:hidden;padding:18px 40px;border-radius:100px;text-decoration:none;font-weight:700;font-size:15.5px;letter-spacing:.3px;transition:all .4s var(--ease);display:inline-flex;align-items:center;gap:10px;}
+    .btn-primary{background:var(--gold);color:var(--ink);box-shadow:0 12px 30px rgba(201,162,39,.28);}
+    .btn-primary:hover{background:var(--gold-2);transform:translateY(-3px);box-shadow:0 18px 40px rgba(201,162,39,.4);}
+    .btn-outline{border:1.5px solid rgba(255,255,255,0.35);color:#fff;}
+    .btn-outline:hover{background:rgba(255,255,255,0.08);border-color:#fff;transform:translateY(-3px);}
+    .btn-primary .arrow,.btn-outline .arrow{transition:transform .35s var(--ease);}
+    .btn-primary:hover .arrow,.btn-outline:hover .arrow{transform:translateX(5px);}
+    .btn-primary::after,.btn-outline::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.22);transform:translateX(-130%) skewX(-15deg);transition:transform .6s ease;}
+    .btn-primary:hover::after,.btn-outline:hover::after{transform:translateX(130%) skewX(-15deg);}
+    .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:#9ea1b3;font-size:10px;letter-spacing:2px;text-transform:uppercase;}
+    .scroll-cue .chev{width:14px;height:14px;border-right:1.5px solid var(--gold-2);border-bottom:1.5px solid var(--gold-2);transform:rotate(45deg);animation:chevBounce 1.8s ease-in-out infinite;}
+    @keyframes chevBounce{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.4;}50%{transform:rotate(45deg) translate(4px,4px);opacity:1;}}
+
+    /* ===== STATS ===== */
+    .stats-wrap{position:relative;margin-top:70px;z-index:5;padding:0 40px;}
+    .stats{max-width:1180px;margin:0 auto;background:var(--ink);border-radius:20px;padding:38px 30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;box-shadow:0 30px 70px rgba(13,15,28,0.35);border:1px solid rgba(201,162,39,0.18);}
+    .stat{text-align:center;color:#fff;flex:1;min-width:130px;position:relative;}
+    .stat:not(:last-child)::after{content:'';position:absolute;right:-10px;top:10%;height:80%;width:1px;background:rgba(255,255,255,0.08);}
+    .stat h3{font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--gold-2);}
+    .stat p{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#9ea1b3;margin-top:6px;}
+
+    /* ===== SECTIONS ===== */
+    section{padding:120px 40px;position:relative;}
+    .section-label{color:var(--gold);font-size:12.5px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+    .text-center .section-label{justify-content:center;}
+    .section-label::before{content:'';width:26px;height:1px;background:var(--gold);}
+    h2{font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--ink);margin-bottom:16px;line-height:1.25;letter-spacing:-.5px;}
+    .section-desc{color:var(--muted);font-size:16px;line-height:1.85;max-width:600px;font-weight:400;}
+    .text-center{text-align:center;}
+    .text-center .section-desc{margin:0 auto;}
+
+    /* ===== SERVICES ===== */
+    #services{background:var(--sand);}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;margin-top:56px;}
+    .service-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(13,15,28,0.06);transition:transform .5s var(--ease), box-shadow .5s var(--ease);border:1px solid rgba(13,15,28,0.05);}
+    .service-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(13,15,28,0.16);}
+    .service-img{overflow:hidden;height:210px;}
+    .service-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);}
+    .service-card:hover img{transform:scale(1.08);}
+    .service-card-body{padding:28px;}
+    .service-card-body h3{font-size:18.5px;font-weight:700;color:var(--ink);margin-bottom:10px;}
+    .service-card-body p{color:var(--muted);font-size:14px;line-height:1.75;}
+    .service-icon{width:52px;height:52px;background:var(--ink);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;margin-top:-52px;position:relative;z-index:2;box-shadow:0 10px 24px rgba(13,15,28,.25);transition:background .4s var(--ease), transform .4s var(--ease);}
+    .service-card:hover .service-icon{background:var(--gold);transform:rotate(-8deg) scale(1.05);}
+    .service-icon .icon svg{stroke:var(--gold);transition:stroke .4s;}
+    .service-card:hover .service-icon .icon svg{stroke:var(--ink);}
+
+    /* ===== ABOUT ===== */
+    .about-section{background:var(--sand-2);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;margin-top:20px;}
+    .about-img{border-radius:16px;overflow:hidden;position:relative;}
+    .about-img::before{content:'';position:absolute;inset:-14px 14px 14px -14px;border:1.5px solid var(--gold);border-radius:16px;z-index:-1;transition:inset .5s var(--ease);}
+    .about-img:hover::before{inset:-8px 8px 8px -8px;}
+    .about-img img{width:100%;height:470px;object-fit:cover;border-radius:16px;transition:transform .8s var(--ease);}
+    .about-img:hover img{transform:scale(1.04);}
+    .about-badge{position:absolute;bottom:34px;right:-24px;background:var(--gold);color:var(--ink);padding:22px 26px;border-radius:12px;text-align:center;box-shadow:0 20px 45px rgba(13,15,28,.28);}
+    .about-badge h4{font-size:38px;font-weight:700;}
+    .about-badge p{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+    .about-features{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;}
+    .feature-item{display:flex;align-items:center;gap:10px;font-size:14px;color:#444;font-weight:500;}
+    .feature-item .tick{background:var(--gold);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .feature-item svg{width:12px;height:12px;stroke:var(--ink);stroke-width:3;fill:none;}
+
+    /* ===== VISION 2030 ===== */
+    .vision-section{background:linear-gradient(135deg,#0f3460,#0d0f1c);color:#fff;position:relative;overflow:hidden;}
+    .vision-lattice-bg{position:absolute;inset:0;opacity:.05;z-index:0;background-size:120px 120px;}
+    .vision-watermark{position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-size:240px;font-weight:700;color:rgba(255,255,255,0.035);line-height:1;pointer-events:none;user-select:none;font-family:'League Spartan',sans-serif;}
+    .vision-section .section-desc{color:#b9bcc9;}
+    .vision-header{display:flex;align-items:center;gap:24px;flex-wrap:wrap;position:relative;z-index:1;}
+    .vision-badge{width:96px;height:96px;border-radius:50%;border:1.5px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:rgba(201,162,39,0.08);position:relative;}
+    .vision-badge::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px dashed rgba(201,162,39,.45);animation:spinSlow 22s linear infinite;}
+    .vision-badge .vb-num{font-size:20px;font-weight:700;color:var(--gold-2);line-height:1;font-family:'League Spartan',sans-serif;}
+    .vision-badge .vb-txt{font-size:8px;letter-spacing:1.5px;color:#ccc;margin-top:3px;}
+    @keyframes spinSlow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+    .vision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;margin-top:56px;position:relative;z-index:1;}
+    .vision-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:14px;padding:32px 26px;transition:all .45s var(--ease);}
+    .vision-card:hover{background:rgba(201,162,39,0.1);border-color:var(--gold);transform:translateY(-8px);}
+    .vision-card .icon-wrap{width:56px;height:56px;border-radius:12px;background:var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:transform .4s var(--ease);}
+    .vision-card:hover .icon-wrap{transform:rotate(-8deg) scale(1.06);}
+    .vision-card .icon-wrap .icon svg{stroke:var(--ink);}
+    .vision-card h3{font-size:17px;font-weight:700;margin-bottom:10px;}
+    .vision-card p{font-size:14px;color:#b0b3c0;line-height:1.75;}
+
+    /* ===== WHY CHOOSE US ===== */
+    .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:56px;}
+    .why-card{text-align:center;padding:44px 26px;border-radius:16px;background:#fff;box-shadow:0 8px 26px rgba(13,15,28,.05);transition:all .45s var(--ease);border:1px solid rgba(13,15,28,.04);}
+    .why-card:hover{background:var(--ink);transform:translateY(-8px);box-shadow:0 30px 60px rgba(13,15,28,.22);}
+    .why-card:hover h3{color:var(--gold-2);}
+    .why-card:hover p{color:#a6a9b8;}
+    .why-icon{width:66px;height:66px;margin:0 auto 22px;background:var(--sand-2);border-radius:50% 50% 50% 16px;display:flex;align-items:center;justify-content:center;transition:all .45s var(--ease);}
+    .why-card:hover .why-icon{background:var(--gold);border-radius:16px 50% 50% 50%;}
+    .why-icon .icon svg{stroke:var(--ink);}
+    .why-card h3{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px;transition:color .35s;}
+    .why-card p{font-size:14px;color:var(--muted);line-height:1.75;transition:color .35s;}
+
+    /* ===== PROMO VIDEO ===== */
+    .promo-section{background:var(--sand-2);}
+    .promo-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;margin-top:30px;}
+    .promo-video-wrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 30px 70px rgba(13,15,28,.22);background:var(--ink);aspect-ratio:16/9;cursor:pointer;}
+    .promo-video-wrap video{width:100%;height:100%;object-fit:cover;display:block;}
+    .promo-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(13,15,28,.4),rgba(15,52,96,.25));transition:opacity .4s var(--ease);}
+    .promo-play.hidden{opacity:0;pointer-events:none;}
+    .play-btn{width:78px;height:78px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(201,162,39,.5);animation:playPulse 2.4s ease-out infinite;transition:transform .3s var(--ease);}
+    .promo-video-wrap:hover .play-btn{transform:scale(1.08);}
+    @keyframes playPulse{0%{box-shadow:0 0 0 0 rgba(201,162,39,.45);}70%{box-shadow:0 0 0 26px rgba(201,162,39,0);}100%{box-shadow:0 0 0 0 rgba(201,162,39,0);}}
+    .play-btn svg{stroke:var(--ink);fill:var(--ink);margin-left:4px;}
+    .promo-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;color:#ccc;background:linear-gradient(135deg,var(--ink),var(--navy-3));text-align:center;padding:20px;}
+    .promo-fallback .icon{width:46px;height:46px;margin:0 auto 12px;}
+    .promo-fallback .icon svg{stroke:var(--gold);}
+    .promo-features{display:flex;flex-direction:column;gap:20px;margin-top:24px;}
+    .promo-feature{display:flex;gap:16px;align-items:flex-start;transition:transform .35s var(--ease);}
+    .promo-feature:hover{transform:translateX(6px);}
+    .promo-feature .icon-wrap{width:44px;height:44px;border-radius:10px;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .promo-feature .icon-wrap .icon svg{stroke:var(--gold);}
+    .promo-feature h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+    .promo-feature p{font-size:13.5px;color:var(--muted);line-height:1.65;}
+
+    /* ===== TEAM ===== */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;margin-top:56px;}
+    .team-card{text-align:center;position:relative;}
+    .team-img{position:relative;border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 10px 30px rgba(13,15,28,.08);}
+    .team-card img{width:100%;height:300px;object-fit:cover;filter:grayscale(35%);transition:transform .6s var(--ease), filter .5s;}
+    .team-card:hover img{filter:grayscale(0%);transform:scale(1.06);}
+    .team-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(13,15,28,.88) 0%,transparent 55%);opacity:0;transition:opacity .4s var(--ease);display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px;}
+    .team-card:hover .team-overlay{opacity:1;}
+    .team-overlay span{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;}
+    .team-overlay span svg{stroke:var(--ink);width:14px;height:14px;}
+    .team-card h3{font-size:16px;font-weight:700;color:var(--ink);}
+    .team-card p{font-size:13px;color:var(--gold);font-weight:600;margin-top:4px;letter-spacing:.3px;}
+
+    /* ===== CLIENTS MARQUEE ===== */
+    .clients-section{background:var(--sand-2);overflow:hidden;}
+    .marquee{margin-top:54px;overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);}
+    .marquee-track{display:flex;gap:70px;width:max-content;animation:marquee 28s linear infinite;align-items:center;}
+    .marquee:hover .marquee-track{animation-play-state:paused;}
+    @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+    .client-logo img{height:52px;object-fit:contain;filter:grayscale(100%);opacity:.55;transition:all .35s var(--ease);}
+    .client-logo img:hover{filter:grayscale(0%);opacity:1;transform:scale(1.08);}
+
+    /* ===== CONTACT ===== */
+    .contact-section{background:linear-gradient(160deg,var(--ink),var(--navy-3));color:#fff;position:relative;overflow:hidden;}
+    .contact-section h2{color:#fff;}
+    .contact-section .section-desc{color:#aaa;}
+    .contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;margin-top:56px;align-items:start;}
+    .contact-info{display:flex;flex-direction:column;gap:26px;}
+    .contact-item{display:flex;gap:16px;align-items:flex-start;transition:transform .35s var(--ease);}
+    .contact-item:hover{transform:translateX(6px);}
+    .contact-item-icon{background:var(--gold);width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .contact-item-icon .icon svg{stroke:var(--ink);}
+    .contact-item h4{color:var(--gold-2);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;font-weight:700;}
+    .contact-item p,.contact-item a{color:#c9cad6;font-size:15px;text-decoration:none;}
+    .contact-form{display:flex;flex-direction:column;gap:16px;background:rgba(255,255,255,0.03);padding:34px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);}
+    .field{position:relative;}
+    .field input,.field textarea,.field select{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:#fff;padding:15px 16px;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;transition:border-color .3s,background .3s;}
+    .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.09);}
+    .field input::placeholder,.field textarea::placeholder{color:#8b8da0;}
+    .field textarea{height:120px;resize:vertical;}
+    .contact-form button{background:var(--gold);color:var(--ink);border:none;padding:16px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;transition:all .35s var(--ease);display:flex;align-items:center;justify-content:center;gap:10px;}
+    .contact-form button:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 14px 30px rgba(201,162,39,.3);}
+
+    /* ===== FOOTER ===== */
+    footer{background:#08090f;color:#9a9caa;padding:70px 40px 24px;position:relative;overflow:hidden;}
+    .footer-lattice{position:absolute;bottom:-80px;left:-80px;width:260px;height:260px;opacity:.05;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px;position:relative;z-index:1;}
+    .footer-about h4{color:#fff;}
+    .footer-about p{font-size:14px;line-height:1.85;margin-top:16px;}
+    .footer-col h4{color:#fff;font-size:15px;font-weight:700;margin-bottom:22px;position:relative;padding-bottom:12px;font-family:'League Spartan',sans-serif;}
+    .footer-col h4::after{content:'';position:absolute;bottom:0;left:0;width:30px;height:2px;background:var(--gold);}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+    .footer-col ul li a{color:#9a9caa;text-decoration:none;font-size:14px;transition:all .3s;position:relative;}
+    .footer-col ul li a:hover{color:var(--gold-2);padding-left:5px;}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:22px;text-align:center;font-size:13px;position:relative;z-index:1;}
+    .footer-bottom span{color:var(--gold);}
+
+    /* ===== SCROLL TO TOP ===== */
+    #toTop{position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:var(--gold);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.25);opacity:0;visibility:hidden;transform:translateY(12px);transition:all .4s var(--ease);z-index:500;}
+    #toTop.show{opacity:1;visibility:visible;transform:translateY(0);}
+    #toTop:hover{background:var(--gold-2);transform:translateY(-4px);}
+    #toTop svg{stroke:var(--ink);}
+
+    /* ===== ICONS ===== */
+    .icon{display:inline-flex;width:100%;height:100%;align-items:center;justify-content:center;}
+    .icon svg{width:52%;height:52%;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .85s var(--ease),transform .85s var(--ease);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-left{opacity:0;transform:translateX(-45px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+    .reveal-left.visible{opacity:1;transform:translateX(0);}
+    .reveal-right{opacity:0;transform:translateX(45px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+    .reveal-right.visible{opacity:1;transform:translateX(0);}
+    .reveal-stagger.visible .stagger-item{opacity:1;transform:translateY(0) scale(1);}
+    .stagger-item{opacity:0;transform:translateY(30px) scale(.97);transition:opacity .65s var(--ease),transform .65s var(--ease);}
+    .stagger-item:nth-child(1){transition-delay:.05s;}
+    .stagger-item:nth-child(2){transition-delay:.15s;}
+    .stagger-item:nth-child(3){transition-delay:.25s;}
+    .stagger-item:nth-child(4){transition-delay:.35s;}
+    .stagger-item:nth-child(5){transition-delay:.45s;}
+    .stagger-item:nth-child(6){transition-delay:.55s;}
+
+    @media (prefers-reduced-motion: reduce){
+        *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:980px){
+        .about-grid,.promo-grid{grid-template-columns:1fr;gap:44px;}
+        .contact-grid{grid-template-columns:1fr;}
+    }
+    @media (max-width:768px){
+        nav ul{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:#0d0f1c;flex-direction:column;justify-content:center;align-items:flex-start;padding:40px;gap:6px;transform:translateX(100%);transition:transform .5s var(--ease);z-index:910;box-shadow:-10px 0 40px rgba(0,0,0,.4);}
+        nav ul.open{transform:translateX(0);}
+        nav ul li{width:100%;}
+        nav ul li a{display:block;padding:14px 4px;font-size:16px;width:100%;}
+        .nav-cta{margin-top:10px;text-align:center;}
+        .burger{display:flex;}
+        .hero h1{font-size:32px;}
+        .hero{padding:100px 22px 90px;}
+        .footer-grid{grid-template-columns:1fr;}
+        section{padding:80px 22px;}
+        nav{padding:14px 20px;}
+        .stats{gap:26px 16px;padding:30px 22px;}
+        .stat:nth-child(2n):not(:last-child)::after{display:none;}
+        .vision-watermark{display:none;}
+        .about-badge{right:8px;}
+        .contact-form{padding:24px;}
+    }
+</style>
+</head>
+<body>
+
+<div id="preloader">
+    <div class="pre-lattice">
+        <svg viewBox="0 0 100 100"><path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z M50 5 L50 35 M90 27 L65 42 M90 73 L65 58 M50 95 L50 65 M10 73 L35 58 M10 27 L35 42 M35 42 L65 42 L65 58 L35 58 Z"/></svg>
+    </div>
+    <p class="pre-text">ARABIAN TALENTS <span>GROUP</span></p>
+</div>
+
+<div id="scroll-progress"></div>
+
+<!-- NAVBAR -->
+<nav id="mainNav">
+    <div class="logo">
+        <img src="assets/logo.png" alt="Arabian Talents Group Logo" onerror="this.style.display='none'">
+        <div class="logo-text">Arabian Talents Group <span>MANPOWER SOLUTIONS</span></div>
+    </div>
+    <ul id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#vision2030">Vision 2030</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline poster="wp-content/uploads/2024/05/professional-labour-services.jpeg" onerror="this.style.display='none'">
+        <source src="https://assets.mixkit.co/videos/25270/25270-720.mp4" type="video/mp4">
+        <source src="wp-content/uploads/2024/08/hero-background.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+    <div class="hero-glow"></div>
+    <svg class="hero-lattice" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z M50 5 L50 35 M90 27 L65 42 M90 73 L65 58 M50 95 L50 65 M10 73 L35 58 M10 27 L35 42 M35 42 L65 42 L65 58 L35 58 Z" stroke="#c9a227" stroke-width="0.6" fill="none"/></svg>
+    <svg class="hero-lattice left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z M50 5 L50 35 M90 27 L65 42 M90 73 L65 58 M50 95 L50 65 M10 73 L35 58 M10 27 L35 42 M35 42 L65 42 L65 58 L35 58 Z" stroke="#c9a227" stroke-width="0.6" fill="none"/></svg>
+    <div class="particle" style="left:8%; animation-duration:9s; animation-delay:0s;"></div>
+    <div class="particle" style="left:20%; animation-duration:12s; animation-delay:1.5s;"></div>
+    <div class="particle" style="left:35%; animation-duration:8s; animation-delay:3s;"></div>
+    <div class="particle" style="left:52%; animation-duration:11s; animation-delay:0.5s;"></div>
+    <div class="particle" style="left:68%; animation-duration:10s; animation-delay:2.5s;"></div>
+    <div class="particle" style="left:80%; animation-duration:13s; animation-delay:1s;"></div>
+    <div class="particle" style="left:92%; animation-duration:9.5s; animation-delay:4s;"></div>
+    <svg class="hero-skyline" viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,90 L0,55 L30,55 L30,40 L45,40 L45,55 L70,55 L70,20 L85,20 L85,55 L120,55 L120,45 L150,45 L150,60 L170,60 L170,30 L190,30 L190,60 L230,60 L230,15 L245,15 L245,60 L280,60 L280,48 L310,48 L310,58 L340,58 L340,25 L360,25 L360,58 L400,58 L400,35 L420,35 L420,58 L460,58 L460,10 L478,10 L478,58 L520,58 L520,42 L545,42 L545,58 L590,58 L590,28 L610,28 L610,58 L650,58 L650,48 L680,48 L680,58 L720,58 L720,18 L738,18 L738,58 L780,58 L780,38 L805,38 L805,58 L850,58 L850,50 L875,50 L875,58 L920,58 L920,22 L938,22 L938,58 L980,58 L980,44 L1010,44 L1010,58 L1050,58 L1050,32 L1070,32 L1070,58 L1120,58 L1120,50 L1150,50 L1150,58 L1200,58 L1200,90 Z"></path>
+    </svg>
+    <div class="hero-content">
+        <p class="eyebrow">Welcome to Arabian Talents Group</p>
+        <h1><span class="word" style="animation-delay:.05s">Your</span> <span class="word" style="animation-delay:.12s">Trusted</span> <span class="word accent" style="animation-delay:.19s">Manpower</span> <span class="word" style="animation-delay:.26s">&amp;</span><br><span class="word" style="animation-delay:.33s">Staffing</span> <span class="word" style="animation-delay:.4s">Solutions</span></h1>
+        <p class="lead">Connecting top talent with leading businesses across Saudi Arabia. We provide skilled professionals for construction, hospitality, cleaning, IT, and more — proudly supporting Saudi Vision 2030.</p>
+        <div class="hero-btns">
+            <a href="#services" class="btn-primary">Our Services <span class="arrow">→</span></a>
+            <a href="#contact" class="btn-outline">Get a Quote <span class="arrow">→</span></a>
+        </div>
+    </div>
+    <!-- <div class="scroll-cue"><span>Scroll</span><span class="chev"></span></div> -->
+</section>
+
+<!-- STATS -->
+<div class="stats-wrap">
+    <div class="stats reveal">
+        <div class="stat"><h3 data-target="500" data-suffix="+">0</h3><p>Clients Served</p></div>
+        <div class="stat"><h3 data-target="5000" data-suffix="+">0</h3><p>Workers Deployed</p></div>
+        <div class="stat"><h3 data-target="10" data-suffix="+">0</h3><p>Years Experience</p></div>
+        <div class="stat"><h3 data-target="15" data-suffix="+">0</h3><p>Industries Covered</p></div>
+    </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" style="padding-top:160px;">
+    <div class="text-center reveal">
+        <p class="section-label" style="justify-content:center;">What We Offer</p>
+        <h2>Our Manpower Services</h2>
+        <p class="section-desc">We provide skilled, semi-skilled, and unskilled workers across various sectors in Saudi Arabia and the Gulf region.</p>
+    </div>
+    <div class="services-grid reveal-stagger reveal">
+        <div class="service-card stagger-item">
+            <div class="service-img"><img src="assets/construction-building-construction-helmet-287867.jpg" alt="Construction" onerror="this.src='https://via.placeholder.com/400x200?text=Construction'"></div>
+            <div class="service-card-body">
+                <div class="service-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M5 20V11l7-6 7 6v9"/><path d="M9 20v-6h6v6"/><path d="M3 11h18"/></svg></span></div>
+                <h3>Construction Workers</h3>
+                <p>Skilled masons, carpenters, welders, painters, and general construction laborers for your projects.</p>
+            </div>
+        </div>
+        <div class="service-card stagger-item">
+            <div class="service-img"><img src="assets/housekeeping-service.jpg" alt="Housekeeping" onerror="this.src='https://via.placeholder.com/400x200?text=Housekeeping'"></div>
+            <div class="service-card-body">
+                <div class="service-icon"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 13c0-3 2-5 4-5s4 2 4 5"/><path d="M6 17h12"/></svg></span></div>
+                <h3>Hospitality &amp; Housekeeping</h3>
+                <p>Professional hotel staff, housekeepers, waiters, chefs, and kitchen crew for hospitality industry.</p>
+            </div>
+        </div>
+        <div class="service-card stagger-item">
+            <div class="service-img"><img src="assets/large_Cleaners_94f3f202a8.jpg" alt="Cleaning" onerror="this.src='https://via.placeholder.com/400x200?text=Cleaning'"></div>
+            <div class="service-card-body">
+                <div class="service-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M6 21l6-14 6 14"/><path d="M8.5 15h7"/><circle cx="12" cy="4" r="1.5"/></svg></span></div>
+                <h3>Cleaning &amp; Janitorial</h3>
+                <p>Trained cleaning professionals for offices, malls, hospitals, and residential properties.</p>
+            </div>
+        </div>
+        <div class="service-card stagger-item">
+            <div class="service-img"><img src="assets/male-electrician-works-switchboard-using-electrical-connection-cable-1.jpg" alt="Technical" onerror="this.src='https://via.placeholder.com/400x200?text=Technical'"></div>
+            <div class="service-card-body">
+                <div class="service-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" stroke-linejoin="round"/></svg></span></div>
+                <h3>Technical &amp; Electrical</h3>
+                <p>Certified electricians, plumbers, HVAC technicians, and MEP engineers for technical projects.</p>
+            </div>
+        </div>
+        <div class="service-card stagger-item">
+            <div class="service-img"><img src="assets/IT-specialists.jpg" alt="IT" onerror="this.src='https://via.placeholder.com/400x200?text=IT'"></div>
+            <div class="service-card-body">
+                <div class="service-icon"><span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8"/><path d="M12 16v4"/></svg></span></div>
+                <h3>IT &amp; Technical Support</h3>
+                <p>IT specialists, network engineers, software developers, and tech support professionals.</p>
+            </div>
+        </div>
+        <div class="service-card stagger-item">
+            <div class="service-img"><img src="assets/truck-driver-transport-4933514.jpg" alt="Drivers" onerror="this.src='https://via.placeholder.com/400x200?text=Drivers'"></div>
+            <div class="service-card-body">
+                <div class="service-icon"><span class="icon"><svg viewBox="0 0 24 24"><rect x="1" y="8" width="13" height="8" rx="1"/><path d="M14 11h4l3 3v2h-7z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg></span></div>
+                <h3>Drivers &amp; Logistics</h3>
+                <p>Licensed heavy vehicle drivers, delivery personnel, and logistics staff for transport needs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+    <div class="about-grid">
+        <div class="about-img reveal-left">
+            <img src="assets/professional-labour-services.jpeg" alt="About Arabian Talents Group">
+            <div class="about-badge">
+                <h4>10+</h4>
+                <p>Years of Excellence</p>
+            </div>
+        </div>
+        <div class="about-content reveal-right">
+            <p class="section-label">About Us</p>
+            <h2>Leading Manpower Solutions in Saudi Arabia</h2>
+            <p class="section-desc">Arabian Talents Group is a premier manpower recruitment and staffing company based in Saudi Arabia. We specialize in providing skilled and unskilled workers across multiple industries including construction, hospitality, oil &amp; gas, cleaning, and more.</p>
+            <br>
+            <p class="section-desc">With over a decade of experience, we have built strong relationships with clients across the Kingdom, delivering reliable, trained, and vetted professionals who meet international standards.</p>
+            <div class="about-features">
+                <div class="feature-item"><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> ISO Certified Company</div>
+                <div class="feature-item"><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Background Verified Workers</div>
+                <div class="feature-item"><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> 24/7 Client Support</div>
+                <div class="feature-item"><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Quick Deployment</div>
+                <div class="feature-item"><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Competitive Pricing</div>
+                <div class="feature-item"><span class="tick"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Training Provided</div>
+            </div>
+            <br>
+            <a href="#contact" class="btn-primary" style="background:var(--gold);color:var(--ink);">Get in Touch <span class="arrow">→</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- VISION 2030 -->
+<section class="vision-section" id="vision2030">
+    <div class="vision-watermark">2030</div>
+    <div class="vision-header reveal">
+        <div class="vision-badge"><span class="vb-num">2030</span><span class="vb-txt">KSA VISION</span></div>
+        <div>
+            <p class="section-label">Our Commitment</p>
+            <h2 style="margin-bottom:8px;">Proudly Supporting Saudi Vision 2030</h2>
+            <p class="section-desc" style="max-width:650px;">Arabian Talents Group aligns its recruitment practices with the Kingdom's Vision 2030 goals — empowering a thriving economy, a vibrant society, and an ambitious nation through responsible workforce solutions.</p>
+        </div>
+    </div>
+    <div class="vision-grid reveal-stagger reveal">
+        <div class="vision-card stagger-item">
+            <div class="icon-wrap"><span class="icon"><svg viewBox="0 0 24 24" stroke="#0d0f1c"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span></div>
+            <h3>Saudization &amp; Localization</h3>
+            <p>Supporting Nitaqat targets by building local capacity alongside skilled expatriate talent.</p>
+        </div>
+        <div class="vision-card stagger-item">
+            <div class="icon-wrap"><span class="icon"><svg viewBox="0 0 24 24" stroke="#0d0f1c"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span></div>
+            <h3>Human Capital Development</h3>
+            <p>Investing in training programs that raise skill standards across every sector we serve.</p>
+        </div>
+        <div class="vision-card stagger-item">
+            <div class="icon-wrap"><span class="icon"><svg viewBox="0 0 24 24" stroke="#0d0f1c"><path d="M3 3v18h18"/><path d="M7 15l4-6 3 4 5-8"/></svg></span></div>
+            <h3>Economic Diversification</h3>
+            <p>Deploying manpower across construction, tech, hospitality and logistics to fuel new industries.</p>
+        </div>
+        <div class="vision-card stagger-item">
+            <div class="icon-wrap"><span class="icon"><svg viewBox="0 0 24 24" stroke="#0d0f1c"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span></div>
+            <h3>Quality of Life &amp; Compliance</h3>
+            <p>Full regulatory compliance and worker welfare standards in line with national reform goals.</p>
+        </div>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section>
+    <div class="text-center reveal">
+        <p class="section-label" style="justify-content:center;">Why Arabian Talents</p>
+        <h2>Why Choose Us?</h2>
+        <p class="section-desc">We go beyond recruitment — we provide end-to-end manpower solutions tailored to your needs.</p>
+    </div>
+    <div class="why-grid reveal-stagger reveal">
+        <div class="why-card stagger-item">
+            <div class="why-icon"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span></div>
+            <h3>Vetted Professionals</h3>
+            <p>All workers are thoroughly screened, background-checked, and verified before deployment.</p>
+        </div>
+        <div class="why-card stagger-item">
+            <div class="why-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" stroke-linejoin="round"/></svg></span></div>
+            <h3>Fast Deployment</h3>
+            <p>Quick turnaround times — we can mobilize workers within days of requirement confirmation.</p>
+        </div>
+        <div class="why-card stagger-item">
+            <div class="why-icon"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/></svg></span></div>
+            <h3>Diverse Talent Pool</h3>
+            <p>Access to skilled workers from Pakistan, India, Bangladesh, Philippines, Nepal and more.</p>
+        </div>
+        <div class="why-card stagger-item">
+            <div class="why-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M9 2h6l1 4H8z"/><path d="M6 6h12v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M9 12l2 2 4-4"/></svg></span></div>
+            <h3>Full Compliance</h3>
+            <p>We handle all visa, iqama, insurance and legal documentation for complete peace of mind.</p>
+        </div>
+        <div class="why-card stagger-item">
+            <div class="why-icon"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5c0-1.4 1.1-2.5 2.5-2.5s2.5 1 2.5 2.2c0 2.8-5 1.6-5 4.5 0 1.3 1.1 2.3 2.5 2.3s2.5-1 2.5-2.3"/></svg></span></div>
+            <h3>Cost Effective</h3>
+            <p>Competitive rates without compromising on quality — maximizing your return on investment.</p>
+        </div>
+        <div class="why-card stagger-item">
+            <div class="why-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M8 12l2.5 2.5L16 9"/><circle cx="12" cy="12" r="9"/></svg></span></div>
+            <h3>Dedicated Support</h3>
+            <p>A dedicated account manager for each client ensuring seamless communication at all times.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PROMO VIDEO -->
+<section class="promo-section">
+    <div class="promo-grid">
+        <div class="promo-video-wrap reveal-left" id="promoWrap">
+            <video id="promoVideo" poster="assets/professional-labour-services.jpeg" muted loop playsinline onerror="document.getElementById('promoVideo').style.display='none'; document.getElementById('promoFallback').style.display='flex';">
+                <source src="https://assets.mixkit.co/videos/46753/46753-720.mp4" type="video/mp4">
+                <source src="wp-content/uploads/2024/08/arabian-talents-overview.mp4" type="video/mp4">
+            </video>
+            <div class="promo-play" id="promoPlay"><div class="play-btn"><svg width="26" height="26" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg></div></div>
+            <div class="promo-fallback" id="promoFallback">
+                <span class="icon"><svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg></span>
+                <p>Company overview video coming soon.</p>
+            </div>
+        </div>
+        <div class="reveal-right">
+            <p class="section-label">See Us In Action</p>
+            <h2>A Closer Look At How We Work</h2>
+            <p class="section-desc">From first enquiry to on-site deployment, watch how our team sources, screens, and mobilizes manpower for clients across the Kingdom.</p>
+            <div class="promo-features">
+                <div class="promo-feature">
+                    <div class="icon-wrap"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span></div>
+                    <div><h4>Rigorous Screening</h4><p>Every candidate is interviewed, tested, and background-checked.</p></div>
+                </div>
+                <div class="promo-feature">
+                    <div class="icon-wrap"><span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 3v3M16 3v3"/></svg></span></div>
+                    <div><h4>Fast Turnaround</h4><p>Streamlined onboarding gets workers on-site within days.</p></div>
+                </div>
+                <div class="promo-feature">
+                    <div class="icon-wrap"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 21v-7a8 8 0 0 1 16 0v7"/><path d="M4 14h4v7H4zM16 14h4v7h-4z"/></svg></span></div>
+                    <div><h4>Ongoing Support</h4><p>Dedicated account managers stay with you after deployment.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" style="background:var(--sand-2);">
+    <div class="text-center reveal">
+        <p class="section-label" style="justify-content:center;">Our People</p>
+        <h2>Meet Our Team</h2>
+        <p class="section-desc">Experienced professionals dedicated to delivering the best manpower solutions.</p>
+    </div>
+    <div class="team-grid reveal-stagger reveal">
+        <div class="team-card stagger-item">
+            <div class="team-img"><img src="assets/Team-member-1.jpg" alt="Team Member" onerror="this.src='https://via.placeholder.com/300x300?text=Team+Member'"><div class="team-overlay"><span><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div></div>
+            <h3>Operations Manager</h3>
+            <p>Manpower Recruitment</p>
+        </div>
+        <div class="team-card stagger-item">
+            <div class="team-img"><img src="assets/Team-member-2NEW.jpg" alt="Team Member" onerror="this.src='https://via.placeholder.com/300x300?text=Team+Member'"><div class="team-overlay"><span><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div></div>
+            <h3>HR Director</h3>
+            <p>Talent Acquisition</p>
+        </div>
+        <div class="team-card stagger-item">
+            <div class="team-img"><img src="assets/Team-member-3N.jpg" alt="Team Member" onerror="this.src='https://via.placeholder.com/300x300?text=Team+Member'"><div class="team-overlay"><span><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div></div>
+            <h3>Client Relations</h3>
+            <p>Business Development</p>
+        </div>
+        <div class="team-card stagger-item">
+            <div class="team-img"><img src="assets/Team-member-4.jpg" alt="Team Member" onerror="this.src='https://via.placeholder.com/300x300?text=Team+Member'"><div class="team-overlay"><span><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div></div>
+            <h3>Compliance Officer</h3>
+            <p>Legal &amp; Visa Affairs</p>
+        </div>
+    </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients-section">
+    <div class="text-center reveal">
+        <p class="section-label" style="justify-content:center;">Trusted By</p>
+        <h2>Our Valued Clients</h2>
+    </div>
+    <div class="marquee">
+        <div class="marquee-track" id="marqueeTrack">
+            <div class="client-logo"><img src="assets/client-logo-1.png" alt="Client" onerror="this.style.display='none'"></div>
+            <div class="client-logo"><img src="assets/client-logo-2.png" alt="Client" onerror="this.style.display='none'"></div>
+            <div class="client-logo"><img src="assets/client-logo-3.png" alt="Client" onerror="this.style.display='none'"></div>
+            <div class="client-logo"><img src="assets/client-logo-4.png" alt="Client" onerror="this.style.display='none'"></div>
+            <div class="client-logo"><img src="assets/KAEC_logo.png" alt="KAEC" onerror="this.style.display='none'"></div>
+            <div class="client-logo"><img src="assets/Dallah-Trane-logo.jpg" alt="Dallah Trane" onerror="this.style.display='none'"></div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+    <div class="text-center reveal">
+        <p class="section-label" style="justify-content:center;">Get in Touch</p>
+        <h2>Contact Us Today</h2>
+        <p class="section-desc" style="margin:0 auto;">Ready to discuss your manpower requirements? Our team is available to help you find the right talent.</p>
+    </div>
+    <div class="contact-grid">
+        <div class="contact-info reveal-left">
+            <div class="contact-item">
+                <div class="contact-item-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11.5A7 7 0 0 0 5 9.5C5 14.7 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span></div>
+                <div>
+                    <h4>Office Address</h4>
+                    <p>Saudi Arabia, Kingdom of Saudi Arabia</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div>
+                <div>
+                    <h4>Phone / WhatsApp</h4>
+                    <a href="tel:+966000000000">+966 XX XXX XXXX</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon"><span class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m3 6 9 7 9-7"/></svg></span></div>
+                <div>
+                    <h4>Email Address</h4>
+                    <a href="mailto:info@arabiantalentsgroup.com">info@arabiantalentsgroup.com</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span></div>
+                <div>
+                    <h4>Working Hours</h4>
+                    <p>Sunday – Thursday: 8:00 AM – 6:00 PM</p>
+                </div>
+            </div>
+        </div>
+        <form class="contact-form reveal-right" onsubmit="handleForm(event)">
+            <div class="field"><input type="text" placeholder="Your Full Name" required></div>
+            <div class="field"><input type="email" placeholder="Email Address" required></div>
+            <div class="field"><input type="tel" placeholder="Phone / WhatsApp"></div>
+            <div class="field">
+                <select required>
+                    <option value="" disabled selected>Select Service Required</option>
+                    <option>Construction Workers</option>
+                    <option>Hospitality Staff</option>
+                    <option>Cleaning Staff</option>
+                    <option>Technical Workers</option>
+                    <option>IT Professionals</option>
+                    <option>Drivers &amp; Logistics</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="field"><textarea placeholder="Describe your requirement (number of workers, duration, location...)"></textarea></div>
+            <button type="submit" id="submitBtn"><span id="submitText">Send Enquiry</span> <span class="arrow">→</span></button>
+        </form>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <svg class="footer-lattice" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z M50 5 L50 35 M90 27 L65 42 M90 73 L65 58 M50 95 L50 65 M10 73 L35 58 M10 27 L35 42 M35 42 L65 42 L65 58 L35 58 Z" stroke="#c9a227" stroke-width="0.6" fill="none"/></svg>
+    <div class="footer-grid">
+        <div class="footer-about footer-col">
+            <h4>Arabian Talents Group</h4>
+            <p>A trusted manpower recruitment company providing skilled professionals across Saudi Arabia and the Gulf region since over a decade.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+                <li><a href="#services">Construction</a></li>
+                <li><a href="#services">Hospitality</a></li>
+                <li><a href="#services">Cleaning</a></li>
+                <li><a href="#services">Technical</a></li>
+                <li><a href="#services">IT Support</a></li>
+                <li><a href="#services">Drivers</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#team">Our Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="#">Saudi Arabia</a></li>
+                <li><a href="mailto:info@arabiantalentsgroup.com">Email Us</a></li>
+                <li><a href="#">WhatsApp</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 <span>Arabian Talents Group</span>. All Rights Reserved. | Manpower Recruitment Solutions</p>
+    </div>
+</footer>
+
+<button id="toTop" aria-label="Scroll to top"><svg width="18" height="18" viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+<script>
+
+function hidePreloader(){
+    const p = document.getElementById('preloader');
+    if (p && !p.classList.contains('done')) p.classList.add('done');
+}
+document.addEventListener('DOMContentLoaded', () => setTimeout(hidePreloader, 600));
+window.addEventListener('load', hidePreloader);
+setTimeout(hidePreloader, 2500); 
+
+
+const nav = document.getElementById('mainNav');
+const progress = document.getElementById('scroll-progress');
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = scrolled + '%';
+    nav.classList.toggle('scrolled', h.scrollTop > 60);
+    toTop.classList.toggle('show', h.scrollTop > 500);
+});
+toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    navLinks.classList.remove('open');
+}));
+
+
+function handleForm(e){
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const txt = document.getElementById('submitText');
+    txt.textContent = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+        txt.textContent = 'Enquiry Sent ✓';
+        setTimeout(() => {
+            alert('Thank you! Your enquiry has been submitted. We will contact you shortly.');
+            e.target.reset();
+            txt.textContent = 'Send Enquiry';
+            btn.disabled = false;
+        }, 700);
+    }, 900);
+}
+
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        const target = a.getAttribute('href');
+        if(target.length > 1){
+            const el = document.querySelector(target);
+            if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        }
+    });
+});
+
+
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.15 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+
+const statEls = document.querySelectorAll('.stat h3[data-target]');
+const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.getAttribute('data-target'), 10);
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1500;
+            const start = performance.now();
+            function tick(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(eased * target) + suffix;
+                if (progress < 1) requestAnimationFrame(tick);
+                else el.textContent = target + suffix;
+            }
+            requestAnimationFrame(tick);
+            statObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+statEls.forEach(el => statObserver.observe(el));
+
+
+const promoVideo = document.getElementById('promoVideo');
+const promoPlay = document.getElementById('promoPlay');
+const promoWrap = document.getElementById('promoWrap');
+if (promoWrap) {
+    promoWrap.addEventListener('click', () => {
+        if (promoVideo.paused) {
+            promoVideo.play();
+            promoVideo.controls = true;
+            promoPlay.classList.add('hidden');
+        }
+    });
+    promoVideo.addEventListener('pause', () => promoPlay.classList.remove('hidden'));
+    promoVideo.addEventListener('error', () => {
+        promoVideo.style.display = 'none';
+        promoPlay.style.display = 'none';
+        const fb = document.getElementById('promoFallback');
+        if (fb) fb.style.display = 'flex';
+    }, true);
+}
+
+
+const track = document.getElementById('marqueeTrack');
+if (track) track.innerHTML += track.innerHTML;
+
+
+document.querySelectorAll('.why-card, .vision-card, .service-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `translateY(-8px) rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*4).toFixed(2)}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+</script>
+</body>
+</html>
