@@ -46,7 +46,7 @@
 
     /* ===== NAVBAR ===== */
     nav{background:rgba(13,15,28,0.72);padding:16px 44px;display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:900;border-bottom:1px solid rgba(255,255,255,0.06);transition:padding .35s var(--ease), background .35s var(--ease);}
-    nav.scrolled{padding:10px 44px;background:rgba(13,15,28,0.92);box-shadow:0 10px 40px rgba(0,0,0,0.35);}
+    nav.scrolled{padding:10px 10px;background:rgba(13,15,28,0.92);box-shadow:0 10px 40px rgba(0,0,0,0.35);}
     .logo{display:flex;align-items:center;gap:12px;min-width:0;flex-shrink:1;}
     .logo img{height:46px;flex-shrink:0;transition:transform .4s var(--ease);}
     .logo:hover img{transform:rotate(-6deg) scale(1.05);}
@@ -338,7 +338,7 @@
         .burger{display:flex;}
         .logo{gap:8px;}
         .logo img{height:32px;}
-        .logo-text{font-size:13.5px;max-width:150px;}
+        .logo-text{font-size:13.5px;max-width:200px;}
         .logo-text span{font-size:8px;letter-spacing:1.5px;}
         .hero h1{font-size:32px;}
         .hero{padding:100px 22px 90px;}
@@ -352,8 +352,7 @@
         .contact-form{padding:24px;}
     }
     @media (max-width:380px){
-        .logo-text{font-size:12px;max-width:120px;}
-        .logo-text span{display:none;}
+        .logo-text{font-size:12px;max-width:170px;}
         .logo img{height:28px;}
         nav{padding:12px 14px;}
     }
