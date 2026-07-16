@@ -24,8 +24,8 @@
         --ease: cubic-bezier(.16,.84,.44,1);
     }
     *{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--sand);overflow-x:hidden;}
+    html{scroll-behavior:smooth;overflow-x:hidden;width:100%;}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--sand);overflow-x:clip ;width:100%;max-width:100vw;}
     h1,h2,h3,h4{font-family:'League Spartan',sans-serif;}
     img{max-width:100%;display:block;}
     a{-webkit-tap-highlight-color:transparent;}
@@ -45,13 +45,13 @@
     #scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2));width:0%;z-index:1200;transition:width .1s linear;}
 
     /* ===== NAVBAR ===== */
-    nav{background:rgba(13,15,28,0.72);padding:16px 44px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:900;border-bottom:1px solid rgba(255,255,255,0.06);transition:padding .35s var(--ease), background .35s var(--ease);}
+    nav{background:rgba(13,15,28,0.72);padding:16px 44px;display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:900;border-bottom:1px solid rgba(255,255,255,0.06);transition:padding .35s var(--ease), background .35s var(--ease);}
     nav.scrolled{padding:10px 44px;background:rgba(13,15,28,0.92);box-shadow:0 10px 40px rgba(0,0,0,0.35);}
-    .logo{display:flex;align-items:center;gap:12px;}
-    .logo img{height:46px;transition:transform .4s var(--ease);}
+    .logo{display:flex;align-items:center;gap:12px;min-width:0;flex-shrink:1;}
+    .logo img{height:46px;flex-shrink:0;transition:transform .4s var(--ease);}
     .logo:hover img{transform:rotate(-6deg) scale(1.05);}
-    .logo-text{color:#fff;font-size:19px;font-weight:700;line-height:1.2;font-family:'League Spartan',sans-serif;letter-spacing:.2px;}
-    .logo-text span{color:var(--gold);display:block;font-size:10.5px;font-weight:500;letter-spacing:3px;font-family:'Inter',sans-serif;margin-top:2px;}
+    .logo-text{color:#fff;font-size:19px;font-weight:700;line-height:1.2;font-family:'League Spartan',sans-serif;letter-spacing:.2px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .logo-text span{color:var(--gold);display:block;font-size:10.5px;font-weight:500;letter-spacing:3px;font-family:'Inter',sans-serif;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     nav ul{list-style:none;display:flex;gap:8px;align-items:center;}
     nav ul li a{color:#cfd0da;text-decoration:none;font-size:13.5px;font-weight:500;transition:color .3s;padding:8px 14px;position:relative;letter-spacing:.2px;}
     nav ul li a:not(.nav-cta)::after{content:'';position:absolute;left:14px;right:14px;bottom:4px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease);}
@@ -59,7 +59,7 @@
     nav ul li a:hover{color:#fff;}
     .nav-cta{background:var(--gold);color:var(--ink) !important;padding:10px 22px !important;border-radius:100px;font-weight:700 !important;transition:all .35s var(--ease);}
     .nav-cta:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 10px 24px rgba(201,162,39,0.4);}
-    .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;z-index:920;}
+    .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;z-index:920;flex-shrink:0;}
     .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:all .35s var(--ease);}
     .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
     .burger.open span:nth-child(2){opacity:0;}
@@ -203,18 +203,52 @@
     .promo-feature h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;}
     .promo-feature p{font-size:13.5px;color:var(--muted);line-height:1.65;}
 
-    /* ===== TEAM ===== */
-    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;margin-top:56px;}
-    .team-card{text-align:center;position:relative;}
-    .team-img{position:relative;border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 10px 30px rgba(13,15,28,.08);}
-    .team-card img{width:100%;height:300px;object-fit:cover;filter:grayscale(35%);transition:transform .6s var(--ease), filter .5s;}
-    .team-card:hover img{filter:grayscale(0%);transform:scale(1.06);}
-    .team-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(13,15,28,.88) 0%,transparent 55%);opacity:0;transition:opacity .4s var(--ease);display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px;}
-    .team-card:hover .team-overlay{opacity:1;}
-    .team-overlay span{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;}
-    .team-overlay span svg{stroke:var(--ink);width:14px;height:14px;}
-    .team-card h3{font-size:16px;font-weight:700;color:var(--ink);}
-    .team-card p{font-size:13px;color:var(--gold);font-weight:600;margin-top:4px;letter-spacing:.3px;}
+    /* ===== TEAM (no-photo, avatar initials, horizontal scroll) ===== */
+    #team{background:var(--sand-2);}
+    .team-scroll-wrap{position:relative;margin-top:56px;}
+    .team-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 6px 28px;scrollbar-width:none;-ms-overflow-style:none;justify-content:flex-start;}
+    .team-track::-webkit-scrollbar{display:none;}
+    @media (min-width:1000px){ .team-track{justify-content:center;} }
+    .team-card{
+        scroll-snap-align:start;flex:0 0 auto;width:270px;
+        background:#fff;border-radius:18px;padding:36px 26px 30px;text-align:center;
+        border:1px solid rgba(13,15,28,.06);box-shadow:0 8px 26px rgba(13,15,28,.06);
+        position:relative;overflow:hidden;transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease);
+    }
+    .team-card::before{
+        content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;
+        background:radial-gradient(circle,rgba(201,162,39,.12) 0%,rgba(201,162,39,0) 70%);
+        transition:transform .5s var(--ease);
+    }
+    .team-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(13,15,28,.16);border-color:rgba(201,162,39,.35);}
+    .team-card:hover::before{transform:scale(1.4);}
+    .team-avatar{
+        width:92px;height:92px;border-radius:50%;margin:0 auto 22px;position:relative;
+        display:flex;align-items:center;justify-content:center;
+        background:linear-gradient(145deg,var(--ink),var(--navy-3));
+        box-shadow:0 10px 26px rgba(13,15,28,.22);
+        transition:transform .45s var(--ease);
+    }
+    .team-card:hover .team-avatar{transform:scale(1.07) rotate(-4deg);}
+    .team-avatar::after{
+        content:'';position:absolute;inset:-5px;border-radius:50%;border:1.5px solid var(--gold);
+        opacity:.5;transition:all .45s var(--ease);
+    }
+    .team-card:hover .team-avatar::after{inset:-9px;opacity:1;}
+    .team-avatar span{font-family:'League Spartan',sans-serif;font-weight:700;font-size:26px;color:var(--gold-2);letter-spacing:.5px;}
+    .team-card h3{font-size:16.5px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+    .team-card p{font-size:12.5px;color:var(--gold);font-weight:600;letter-spacing:.4px;text-transform:uppercase;}
+    .team-quote{width:26px;height:26px;margin:16px auto 0;opacity:.18;transition:opacity .4s var(--ease);}
+    .team-card:hover .team-quote{opacity:.4;}
+    .team-quote svg{stroke:var(--ink);}
+    .team-scroll-hint{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px;color:var(--muted);font-size:12.5px;}
+    .team-scroll-hint svg{width:16px;height:16px;stroke:var(--gold);animation:hintSlide 1.6s ease-in-out infinite;}
+    @keyframes hintSlide{0%,100%{transform:translateX(0);opacity:.5;}50%{transform:translateX(6px);opacity:1;}}
+    .team-nav{display:flex;gap:10px;justify-content:center;margin-top:18px;}
+    .team-nav button{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(13,15,28,.12);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s var(--ease);}
+    .team-nav button:hover{background:var(--ink);border-color:var(--ink);}
+    .team-nav button:hover svg{stroke:#fff;}
+    .team-nav button svg{stroke:var(--ink);transition:stroke .3s;}
 
     /* ===== CLIENTS MARQUEE ===== */
     .clients-section{background:var(--sand-2);overflow:hidden;}
@@ -302,6 +336,10 @@
         nav ul li a{display:block;padding:14px 4px;font-size:16px;width:100%;}
         .nav-cta{margin-top:10px;text-align:center;}
         .burger{display:flex;}
+        .logo{gap:8px;}
+        .logo img{height:32px;}
+        .logo-text{font-size:13.5px;max-width:150px;}
+        .logo-text span{font-size:8px;letter-spacing:1.5px;}
         .hero h1{font-size:32px;}
         .hero{padding:100px 22px 90px;}
         .footer-grid{grid-template-columns:1fr;}
@@ -312,6 +350,12 @@
         .vision-watermark{display:none;}
         .about-badge{right:8px;}
         .contact-form{padding:24px;}
+    }
+    @media (max-width:380px){
+        .logo-text{font-size:12px;max-width:120px;}
+        .logo-text span{display:none;}
+        .logo img{height:28px;}
+        nav{padding:12px 14px;}
     }
 </style>
 </head>
@@ -587,32 +631,42 @@
 </section>
 
 <!-- TEAM -->
-<section id="team" style="background:var(--sand-2);">
+<section id="team">
     <div class="text-center reveal">
-        <p class="section-label" style="justify-content:center;">Our People</p>
+        <p class="section-label" style="justify-content:center;">Our Leadership</p>
         <h2>Meet Our Team</h2>
-        <p class="section-desc">Experienced professionals dedicated to delivering the best manpower solutions.</p>
+        <p class="section-desc">The people leading Arabian Talents Group's mission to deliver world-class manpower solutions.</p>
     </div>
-    <div class="team-grid reveal-stagger reveal">
-        <div class="team-card stagger-item">
-            <div class="team-img"><img src="assets/Team-member-1.jpg" alt="Team Member" onerror="this.src='https://via.placeholder.com/300x300?text=Team+Member'"><div class="team-overlay"><span><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div></div>
-            <h3>Operations Manager</h3>
-            <p>Manpower Recruitment</p>
+    <div class="team-scroll-wrap reveal">
+        <div class="team-track" id="teamTrack">
+            <div class="team-card">
+                <div class="team-avatar"><span>MS</span></div>
+                <h3>Muaviya Shah</h3>
+                <p>Admin Manager</p>
+                <div class="team-quote"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 8.5c-2 0-3.5 1.6-3.5 4 0 2 1.3 3.2 3 3.2.4 0 .8-.1 1-.2-.3 1.5-1.4 2.5-2.8 3l.5 1.2c2.4-.6 4-2.6 4-5.4v-1.8c0-2.2-1-4-2.2-4zM17 8.5c-2 0-3.5 1.6-3.5 4 0 2 1.3 3.2 3 3.2.4 0 .8-.1 1-.2-.3 1.5-1.4 2.5-2.8 3l.5 1.2c2.4-.6 4-2.6 4-5.4v-1.8c0-2.2-1-4-2.2-4z"/></svg></div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar"><span>SA</span></div>
+                <h3>Syed Ahmed</h3>
+                <p>Sales Executive</p>
+                <div class="team-quote"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 8.5c-2 0-3.5 1.6-3.5 4 0 2 1.3 3.2 3 3.2.4 0 .8-.1 1-.2-.3 1.5-1.4 2.5-2.8 3l.5 1.2c2.4-.6 4-2.6 4-5.4v-1.8c0-2.2-1-4-2.2-4zM17 8.5c-2 0-3.5 1.6-3.5 4 0 2 1.3 3.2 3 3.2.4 0 .8-.1 1-.2-.3 1.5-1.4 2.5-2.8 3l.5 1.2c2.4-.6 4-2.6 4-5.4v-1.8c0-2.2-1-4-2.2-4z"/></svg></div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar"><span>MK</span></div>
+                <h3>Minhaj Khan</h3>
+                <p>Sales Manager</p>
+                <div class="team-quote"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 8.5c-2 0-3.5 1.6-3.5 4 0 2 1.3 3.2 3 3.2.4 0 .8-.1 1-.2-.3 1.5-1.4 2.5-2.8 3l.5 1.2c2.4-.6 4-2.6 4-5.4v-1.8c0-2.2-1-4-2.2-4zM17 8.5c-2 0-3.5 1.6-3.5 4 0 2 1.3 3.2 3 3.2.4 0 .8-.1 1-.2-.3 1.5-1.4 2.5-2.8 3l.5 1.2c2.4-.6 4-2.6 4-5.4v-1.8c0-2.2-1-4-2.2-4z"/></svg></div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar"><span>R</span></div>
+                <h3>Rafique</h3>
+                <p>Human Relation Manager</p>
+                <div class="team-quote"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 8.5c-2 0-3.5 1.6-3.5 4 0 2 1.3 3.2 3 3.2.4 0 .8-.1 1-.2-.3 1.5-1.4 2.5-2.8 3l.5 1.2c2.4-.6 4-2.6 4-5.4v-1.8c0-2.2-1-4-2.2-4zM17 8.5c-2 0-3.5 1.6-3.5 4 0 2 1.3 3.2 3 3.2.4 0 .8-.1 1-.2-.3 1.5-1.4 2.5-2.8 3l.5 1.2c2.4-.6 4-2.6 4-5.4v-1.8c0-2.2-1-4-2.2-4z"/></svg></div>
+            </div>
         </div>
-        <div class="team-card stagger-item">
-            <div class="team-img"><img src="assets/Team-member-2NEW.jpg" alt="Team Member" onerror="this.src='https://via.placeholder.com/300x300?text=Team+Member'"><div class="team-overlay"><span><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div></div>
-            <h3>HR Director</h3>
-            <p>Talent Acquisition</p>
-        </div>
-        <div class="team-card stagger-item">
-            <div class="team-img"><img src="assets/Team-member-3N.jpg" alt="Team Member" onerror="this.src='https://via.placeholder.com/300x300?text=Team+Member'"><div class="team-overlay"><span><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div></div>
-            <h3>Client Relations</h3>
-            <p>Business Development</p>
-        </div>
-        <div class="team-card stagger-item">
-            <div class="team-img"><img src="assets/Team-member-4.jpg" alt="Team Member" onerror="this.src='https://via.placeholder.com/300x300?text=Team+Member'"><div class="team-overlay"><span><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L7.9 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span></div></div>
-            <h3>Compliance Officer</h3>
-            <p>Legal &amp; Visa Affairs</p>
+        <div class="team-nav">
+            <button id="teamPrev" aria-label="Scroll left"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button id="teamNext" aria-label="Scroll right"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
         </div>
     </div>
 </section>
@@ -862,6 +916,16 @@ if (promoWrap) {
 
 const track = document.getElementById('marqueeTrack');
 if (track) track.innerHTML += track.innerHTML;
+
+/* Team horizontal scroll nav buttons */
+const teamTrack = document.getElementById('teamTrack');
+const teamPrev = document.getElementById('teamPrev');
+const teamNext = document.getElementById('teamNext');
+if (teamTrack && teamPrev && teamNext) {
+    const scrollAmt = () => (teamTrack.querySelector('.team-card')?.offsetWidth || 270) + 24;
+    teamPrev.addEventListener('click', () => teamTrack.scrollBy({left: -scrollAmt(), behavior: 'smooth'}));
+    teamNext.addEventListener('click', () => teamTrack.scrollBy({left: scrollAmt(), behavior: 'smooth'}));
+}
 
 
 document.querySelectorAll('.why-card, .vision-card, .service-card').forEach(card => {
