@@ -330,7 +330,7 @@
         .contact-grid{grid-template-columns:1fr;}
     }
     @media (max-width:768px){
-        nav ul{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:#0d0f1c;flex-direction:column;justify-content:center;align-items:flex-start;padding:40px;gap:6px;transform:translateX(100%);transition:transform .5s var(--ease);z-index:910;box-shadow:-10px 0 40px rgba(0,0,0,.4);}
+        nav ul{position:fixed;top:0;right:0;height:100vh;width:min(65vw,320px);background:#0d0f1c;flex-direction:column;align-items:flex-start;padding:40px;gap:6px;transform:translateX(100%);transition:transform .5s var(--ease);z-index:910;box-shadow:-10px 0 40px rgba(0,0,0,.4);}
         nav ul.open{transform:translateX(0);}
         nav ul li{width:100%;}
         nav ul li a{display:block;padding:14px 4px;font-size:16px;width:100%;}
@@ -350,6 +350,8 @@
         .vision-watermark{display:none;}
         .about-badge{right:8px;}
         .contact-form{padding:24px;}
+        .hero p.lead{font-size:15px;}
+        .about-img img{width:100%;height:275px;}
     }
     @media (max-width:380px){
         .logo-text{font-size:12px;max-width:170px;}
@@ -491,7 +493,7 @@
 <section class="about-section" id="about">
     <div class="about-grid">
         <div class="about-img reveal-left">
-            <img src="assets/professional-labour-services.jpeg" alt="About Arabian Talents Group">
+            <img src="assets/image.png" alt="About Arabian Talents Group">
             <div class="about-badge">
                 <h4>10+</h4>
                 <p>Years of Excellence</p>
@@ -792,6 +794,43 @@
 <button id="toTop" aria-label="Scroll to top"><svg width="18" height="18" viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M18 15l-6-6-6 6"/></svg></button>
 
 <script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const video = document.getElementById("promoVideo");
+    const playBtn = document.getElementById("promoPlay");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                video.play()
+                    .then(() => {
+                        if (playBtn) playBtn.style.display = "none";
+                    })
+                    .catch(error => {
+                        console.log("Autoplay blocked or failed:", error);
+                    });
+            } else {
+                video.pause();
+                if (playBtn) playBtn.style.display = "flex";
+            }
+        });
+    }, {
+        threshold: 0.2 
+    });
+
+    if (video) {
+        observer.observe(video);
+    }
+    if (playBtn && video) {
+        playBtn.addEventListener("click", function () {
+            if (video.paused) {
+                video.play();
+                playBtn.style.display = "none";
+            }
+        });
+    }
+});
 
 function hidePreloader(){
     const p = document.getElementById('preloader');
